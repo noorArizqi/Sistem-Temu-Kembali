@@ -1,0 +1,144 @@
+Microsoft Windows [Version 10.0.14393]
+(c) 2016 Microsoft Corporation. All rights reserved.
+
+C:\Users\apriliandra>cd C:\xampp\mysql\bin
+
+C:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 6
+Server version: 10.1.10-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2015, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| latihan1           |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
++--------------------+
+5 rows in set (0.02 sec)
+
+MariaDB [(none)]> use latihan1;
+Database changed
+MariaDB [latihan1]> desc Data_Mahasiswa;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| nim           | char(8)      | NO   | PRI | NULL    |       |
+| Nama          | varchar(30)  | YES  |     | NULL    |       |
+| Alamat        | varchar(100) | YES  |     | NULL    |       |
+| Hp            | int(12)      | YES  |     | NULL    |       |
+| jenis_kelamin | varchar(10)  | YES  |     | NULL    |       |
+| tanggal_lahir | date         | YES  |     | NULL    |       |
+| kode_dosen    | varchar(10)  | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+MariaDB [latihan1]> insert into Data_Mahasiswa values
+    -> (11223344,"Dian Suryani","Bekasi","","Perempuan","1998-10-12",""),
+    -> (11223345, "Doni Kurniawan","Cikarang","", "Laki-Laki", "1999-11-16", ""),
+    -> (11223346, "Dina Hafizatul","Karawang","", "Perempuan", "1997-12-01", ""),
+    -> (11223347, "Lisa Ayu","Bekasi","", "Perempuan", "1996-01-02", ""),
+    -> (11223348, "Tiara Wahidah","Bekasi","", "Perempuan", "1990-02-05", ""),
+    -> (11223349, "Anton Sinaga","Cikarang","", "Laki-Laki", "1988-03-10", "");
+Query OK, 6 rows affected, 6 warnings (0.09 sec)
+Records: 6  Duplicates: 0  Warnings: 6
+
+MariaDB [latihan1]> select *from Data_Mahasiswa;
++----------+----------------+----------+------+---------------+---------------+------------+
+| nim      | Nama           | Alamat   | Hp   | jenis_kelamin | tanggal_lahir | kode_dosen |
++----------+----------------+----------+------+---------------+---------------+------------+
+| 11223344 | Dian Suryani   | Bekasi   |    0 | Perempuan     | 1998-10-12    |            |
+| 11223345 | Doni Kurniawan | Cikarang |    0 | Laki-Laki     | 1999-11-16    |            |
+| 11223346 | Dina Hafizatul | Karawang |    0 | Perempuan     | 1997-12-01    |            |
+| 11223347 | Lisa Ayu       | Bekasi   |    0 | Perempuan     | 1996-01-02    |            |
+| 11223348 | Tiara Wahidah  | Bekasi   |    0 | Perempuan     | 1990-02-05    |            |
+| 11223349 | Anton Sinaga   | Cikarang |    0 | Laki-Laki     | 1988-03-10    |            |
++----------+----------------+----------+------+---------------+---------------+------------+
+6 rows in set (0.00 sec)
+
+
+MariaDB [latihan1]> select *from Data_mahasiswa where nama = "dian Suryani";
++----------+--------------+--------+------+---------------+---------------+------------+
+| nim      | Nama         | Alamat | Hp   | jenis_kelamin | tanggal_lahir | kode_dosen |
++----------+--------------+--------+------+---------------+---------------+------------+
+| 11223344 | Dian Suryani | Bekasi |    0 | Perempuan     | 1979-08-31    |            |
++----------+--------------+--------+------+---------------+---------------+------------+
+1 row in set (0.03 sec)
+
+MariaDB [latihan1]> delete from Data_Mahasiswa where nama ="Dina Hafizatul";
+Query OK, 1 row affected (0.08 sec)
+
+MariaDB [latihan1]> select *from Data_Mahasiswa;
++----------+----------------+----------+------+---------------+---------------+------------+
+| nim      | Nama           | Alamat   | Hp   | jenis_kelamin | tanggal_lahir | kode_dosen |
++----------+----------------+----------+------+---------------+---------------+------------+
+| 11223344 | Dian Suryani   | Bekasi   |    0 | Perempuan     | 1979-08-31    |            |
+| 11223345 | Doni Kurniawan | Cikarang |    0 | Laki-Laki     | 1999-11-16    |            |
+| 11223347 | Lisa Ayu       | Bekasi   |    0 | Perempuan     | 1996-01-02    |            |
+| 11223348 | Tiara Wahidah  | Bekasi   |    0 | Perempuan     | 1990-02-05    |            |
+| 11223349 | Anton Sinaga   | Cikarang |    0 | Laki-Laki     | 1988-03-10    |            |
++----------+----------------+----------+------+---------------+---------------+------------+
+5 rows in set (0.00 sec)
+
+MariaDB [latihan1]> select *from Data_Mahasiswa where tanggal_lahir >= "1996-01-02";
++----------+----------------+----------+------+---------------+---------------+------------+
+| nim      | Nama           | Alamat   | Hp   | jenis_kelamin | tanggal_lahir | kode_dosen |
++----------+----------------+----------+------+---------------+---------------+------------+
+| 11223345 | Doni Kurniawan | Cikarang |    0 | Laki-Laki     | 1999-11-16    |            |
+| 11223347 | Lisa Ayu       | Bekasi   |    0 | Perempuan     | 1996-01-02    |            |
++----------+----------------+----------+------+---------------+---------------+------------+
+2 rows in set (0.05 sec)
+
+MariaDB [latihan1]> select *from Data_Mahasiswa where Alamat = "Bekasi" and jenis_kelamin = "perempuan";
++----------+---------------+--------+------+---------------+---------------+------------+
+| nim      | Nama          | Alamat | Hp   | jenis_kelamin | tanggal_lahir | kode_dosen |
++----------+---------------+--------+------+---------------+---------------+------------+
+| 11223344 | Dian Suryani  | Bekasi |    0 | Perempuan     | 1979-08-31    |            |
+| 11223347 | Lisa Ayu      | Bekasi |    0 | Perempuan     | 1996-01-02    |            |
+| 11223348 | Tiara Wahidah | Bekasi |    0 | Perempuan     | 1990-02-05    |            |
++----------+---------------+--------+------+---------------+---------------+------------+
+3 rows in set (0.00 sec)
+
+
+MariaDB [latihan1]> SELECT * FROM data_mahasiswa WHERE Alamat = "Bekasi" AND jenis_kelamin = "Laki-Laki"
+    -> OR FLOOR(DATEDIFF(CURDATE(), tanggal_lahir) / 365) > 22 AND jenis_kelamin = "Perempuan";
++----------+---------------+--------+------+---------------+---------------+------------+
+| nim      | Nama          | Alamat | Hp   | jenis_kelamin | tanggal_lahir | kode_dosen |
++----------+---------------+--------+------+---------------+---------------+------------+
+| 11223344 | Dian Suryani  | Bekasi |    0 | Perempuan     | 1979-08-31    |            |
+| 11223347 | Lisa Ayu      | Bekasi |    0 | Perempuan     | 1996-01-02    |            |
+| 11223348 | Tiara Wahidah | Bekasi |    0 | Perempuan     | 1990-02-05    |            |
++----------+---------------+--------+------+---------------+---------------+------------+
+3 rows in set (0.05 sec)
+
+MariaDB [latihan1]> SELECT * FROM data_mahasiswa WHERE Alamat = "Bekasi" AND jenis_kelamin = "Laki-Laki"
+    -> OR FLOOR(DATEDIFF(CURDATE(), tanggal_lahir) / 365) > 22 AND jenis_kelamin = "Perempuan";
++----------+---------------+--------+------+---------------+---------------+------------+
+| nim      | Nama          | Alamat | Hp   | jenis_kelamin | tanggal_lahir | kode_dosen |
++----------+---------------+--------+------+---------------+---------------+------------+
+| 11223344 | Dian Suryani  | Bekasi |    0 | Perempuan     | 1979-08-31    |            |
+| 11223347 | Lisa Ayu      | Bekasi |    0 | Perempuan     | 1996-01-02    |            |
+| 11223348 | Tiara Wahidah | Bekasi |    0 | Perempuan     | 1990-02-05    |            |
++----------+---------------+--------+------+---------------+---------------+------------+
+3 rows in set (0.00 sec)
+
+MariaDB [latihan1]> select nama, Alamat from Data_mahasiswa;
++----------------+----------+
+| nama           | Alamat   |
++----------------+----------+
+| Dian Suryani   | Bekasi   |
+| Doni Kurniawan | Cikarang |
+| Lisa Ayu       | Bekasi   |
+| Tiara Wahidah  | Bekasi   |
+| Anton Sinaga   | Cikarang |
++----------------+----------+
+5 rows in set (0.00 sec)
+
+MariaDB [latihan1]>
