@@ -1,0 +1,9 @@
+catatan intalasi:
+1. tambahkan tabel 'katakunci' di database 'stki'
+2. field tabel 'katakunci' : 'id' varchar 5 dan 'kata' varchar 25
+
+3. download file searchjaccard1,2,3 dan searchsjaccard1,2,3
+4. copykan file2 tersebut ke localhost
+
+5. buat menu dengan mengedit file index.php
+6. menu jaccard1, jaccard2, jaccard3 mewakili file yang di download sebelumnya
